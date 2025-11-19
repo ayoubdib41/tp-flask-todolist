@@ -1,0 +1,41 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Formulaire pour ajouter une nouvelle tâche -->
+    <section class="add-task-form">
+        <form action="{{ url_for('add') }}" method="POST">
+            <input type="text" name="title" placeholder="Titre de la nouvelle tâche..." required>
+            <button type="submit">Ajouter</button>
+        </form>
+    </section>
+
+    <!-- Section pour afficher la liste des tâches -->
+    <section class="task-list">
+        <h2>Liste des Tâches</h2>
+        
+        <!-- Si la liste 'tasks' n'est pas vide -->
+        {% if tasks %}
+            <ul>
+                <!-- Boucle sur chaque tâche -->
+                {% for task in tasks %}
+                    <!-- Ajoute une classe 'done' si la tâche est terminée -->
+                    <li class="{% if task.done %}done{% endif %}">
+                        <span class="task-title">{{ task.title }}</span>
+                        <div class="task-actions">
+                            <!-- Si la tâche n'est pas encore faite, afficher le bouton "Terminer" -->
+                            {% if not task.done %}
+                                <a href="{{ url_for('done', task_id=task.id) }}" class="btn-done">Terminer</a>
+                            {% endif %}
+                            <!-- Toujours afficher le bouton "Supprimer" -->
+                            <a href="{{ url_for('delete', task_id=task.id) }}" class="btn-delete">Supprimer</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <!-- Message si aucune tâche n'est présente -->
+            <p>Aucune tâche pour le moment. Ajoutez-en une !</p>
+        {% endif %}
+    </section>
+{% endblock %}

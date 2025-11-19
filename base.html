@@ -1,0 +1,30 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Tâches Flask</title>
+    <!-- Lien vers notre feuille de style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mon Gestionnaire de Tâches</h1>
+        </header>
+
+        <main>
+            <!-- Ce bloc sera remplacé par le contenu de 'index.html' -->
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; 2025 - TP Flask</p>
+        </footer>
+    </div>
+
+    <!-- Lien vers notre fichier JavaScript (placé à la fin pour un meilleur chargement) -->
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
